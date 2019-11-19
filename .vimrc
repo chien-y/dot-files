@@ -13,6 +13,9 @@ Plug 'ervandew/supertab'
 "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 """""""""Color Scheme"""""""""
+Plug 'sainnhe/gruvbox-material'
+Plug 'sheerun/vim-polyglot'
+
 Plug 'gruvbox-community/gruvbox'
 Plug 'joshdick/onedark.vim'
  
@@ -55,8 +58,16 @@ set smartcase "Do smart case match
 set hlsearch "highlight matches
 set backspace=indent,eol,start
 
-colorscheme gruvbox
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+
+set termguicolors
 set background=dark
+colorscheme gruvbox-material
+let g:airline_theme = 'gruvbox_material'
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_disable_italic_comment = 0
 
 """""""""""""""some key mapping"""""""""""""""
 "Change the key for leaving insert mode
