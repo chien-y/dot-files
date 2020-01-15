@@ -8,7 +8,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 """""""""" Jedi-Vim""""""""""
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 
 Plug 'ervandew/supertab'
 "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
@@ -44,6 +44,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'jpalardy/vim-slime', { 'for': 'python'  }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python'  }
 
+""""Snippet""""
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 set cursorline "Color the cursor line
@@ -51,10 +54,10 @@ let python_highlight_all=1
 syntax on
 filetype plugin indent on
 
-" set autowrite
-" set number
 " turn relative line numbers on
-set relativenumber"
+set relativenumber
+set number
+set number relativenumber
 
 """""""PEP8""""""""
 set autoindent
@@ -92,9 +95,12 @@ nnoremap <buffer> <F6> <Esc>:w<cr>:vert ter python "%"<cr>
 nnoremap <buffer> <F5> <Esc>: !python "%"<cr>
 inoremap jk <ESC>
 
-nnoremap <Space> <Nop>
-let mapleader =" "
-nnoremap <leader>w :w<cr>
+" nnoremap <Space> <Nop>
+let mapleader = "\<Space>"
+set ttimeoutlen=150
+set timeoutlen=150
+   
+nnoremap <buffer> <leader>w :w<cr>
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -102,27 +108,36 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 "key maps only one window
-nnoremap <leader>o <C-W><C-O>
-nnoremap <leader>q <C-W><C-q>
+nnoremap <buffer> <leader>o <C-W><C-O>
+nnoremap <buffer> <leader>q <C-W><C-q>
 
 " vim-autoformat
 noremap <F3> <Esc>:Autoformat<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
+" youcompleteme key map
+let g:ycm_key_list_select_completion   = ['<TAB>','<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+nnoremap <buffer> <leader>k :YcmCompleter GetDoc<CR>
 
+let g:UltiSnipsExpandTrigger="<leader>s"
+let g:UltiSnipsJumpForwardTrigger="<c-j>" 
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 let g:python3_host_prog = '/home/chien/anaconda3/bin/python3'
 
 " Disable signature help
 
 " Disable Jedi-vim autocompletion and enable call-signatures options
-let g:jedi#auto_initialization = 0
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = ""
-let g:jedi#show_call_signatures = "1"
+" let g:jedi#auto_initialization = 0
+" let g:jedi#completions_enabled = 0
+" let g:jedi#auto_vim_configuration = 0
+" let g:jedi#smart_auto_mappings = 0
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#completions_command = ""
+" let g:jedi#show_call_signatures = "1"
 
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_aggregate_errors = 1
@@ -158,13 +173,13 @@ let g:ipython_cell_tag = '# #'
 "  Keyboard mappings. <Leader> is \ (backslash) by default
 
 "" map <Leader>r to run script
-autocmd FileType python nnoremap <buffer> <Leader>r :IPythonCellRun<CR>
+autocmd FileType python nnoremap <buffer> <Leader>r <Esc>:w<cr>:IPythonCellRun<CR>
 
 " map <Leader>R to run script and time the execution
 autocmd FileType python nnoremap <buffer> <Leader>R :IPythonCellRunTime<CR>
 "
 "" map <Leader>c to execute the current cell
-autocmd FileType python nnoremap <buffer> <Leader>c :IPythonCellExecuteCell<CR>
+autocmd FileType python nnoremap <buffer> <Leader>c <Esc>:w<cr>:IPythonCellExecuteCell<CR>
 
 " map <Leader>C to execute the current cell and jump to the next cell
 autocmd FileType python nnoremap <buffer> <Leader>C :IPythonCellExecuteCellJump<CR>

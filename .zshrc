@@ -8,7 +8,9 @@ export ZSH="/home/chien/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="wezm"
+ZSH_THEME='pi'
+# ZSH_THEME="wezm"
+# ZSH_THEME="Ducula/ducula"
 
 
 
@@ -44,7 +46,7 @@ ZSH_THEME="wezm"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -70,7 +72,7 @@ ZSH_THEME="wezm"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions tmux)
+plugins=(git zsh-autosuggestions tmux autojump zsh-syntax-highlighting)
 
 
 
@@ -104,5 +106,47 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+alias zshrc="vim ~/.zshrc"
+alias vimrc="vim ~/.vimrc"
+alias tmuxconf="vim ~/.tmux.conf"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Vi mode
+bindkey -v
+# kill the lag
+export KEYTIMEOUT=20
+bindkey 'jk' vi-cmd-mode
+bindkey '^P' up-history
+bindkey '^N' down-history
+
+PS1+='${VIMODE}'
+#   'I' for normal insert mode
+#   a big red '>' for command mode - to me this is 'NOT insert' because red
+function zle-line-init zle-keymap-select {
+    D='%B%F{cyan}И%f%b '
+    GIANT_I='%B%F{magenta}⌱%f%b '
+    VIMODE="${${KEYMAP/vicmd/$D}/(main|viins)/$GIANT_I}"
+    zle reset-prompt
+    }
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/chien/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/chien/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/chien/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/chien/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# Autosuggestion key binding
+bindkey '^ ' autosuggest-accept
+
+
