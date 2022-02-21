@@ -1,5 +1,11 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="/home/chien/anaconda3/bin:$PATH"
+export PATH="/home/chien/julia-1.0.5/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+eval "$(/bin/brew shellenv)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/chien/.oh-my-zsh"
@@ -8,15 +14,11 @@ export ZSH="/home/chien/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME='pi'
-# ZSH_THEME="wezm"
-# ZSH_THEME="Ducula/ducula"
-
-
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -37,7 +39,7 @@ ZSH_THEME='pi'
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -46,7 +48,7 @@ ZSH_THEME='pi'
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -68,22 +70,18 @@ ENABLE_CORRECTION="true"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions tmux autojump zsh-syntax-highlighting)
-
-
-
-
-# User configuration
-
-# Automatically starts tmux
-ZSH_TMUX_AUTOSTART=true
+plugins=(git zsh-autosuggestions autojump tmux zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
+# User configuration
+# Automatically starts tmux
+ZSH_TMUX_AUTOSTART=True
+source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -110,6 +108,10 @@ alias zshrc="vim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
 alias tmuxconf="vim ~/.tmux.conf"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias v="vim"
+
+# open files
+alias open=xdg-open
 
 # Vi mode
 bindkey -v
@@ -120,33 +122,16 @@ bindkey '^P' up-history
 bindkey '^N' down-history
 
 PS1+='${VIMODE}'
-#   'I' for normal insert mode
-#   a big red '>' for command mode - to me this is 'NOT insert' because red
+#   '$' for normal insert mode
+#   a big red 'I' for command mode - to me this is 'NOT insert' because red
 function zle-line-init zle-keymap-select {
-    D='%B%F{cyan}И%f%b '
-    GIANT_I='%B%F{magenta}⌱%f%b '
-    VIMODE="${${KEYMAP/vicmd/$D}/(main|viins)/$GIANT_I}"
+    DOLLAR='%B%F{green}$%f%b '
+    GIANT_I='%B%F{red}I%f%b '
+    VIMODE="${${KEYMAP/vicmd/$GIANT_I}/(main|viins)/$DOLLAR}"
     zle reset-prompt
-    }
+}
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/chien/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/chien/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/chien/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/chien/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# Autosuggestion key binding
+# autosuggestion key binding
 bindkey '^ ' autosuggest-accept
-
-

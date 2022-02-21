@@ -131,8 +131,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export PATH="$PATH:/home/chien/julia-1.0.5/bin"
+export PATH="/usr/local/bin:$PATH"
+eval "$(/bin/brew shellenv)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# Start tmux on every shell login
-# If not running interactively, do not do anything
-[[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux
