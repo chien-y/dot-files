@@ -126,6 +126,15 @@ return {
 			on_attach = on_attach,
 		})
 
+		-- add dictionary to latex lsp
+		-- "zg" add the word under the cursor to dictionary
+		local path = vim.fn.stdpath("config") .. "/lua/spell/en.utf-8.add"
+		local words = {}
+
+		for word in io.open(path, "r"):lines() do
+			table.insert(words, word)
+		end
+
 		-- configure latex server
 		lspconfig["ltex"].setup({
 			capabilities = capabilities,
@@ -141,6 +150,13 @@ return {
 				"rnoweb",
 				"tex",
 				"pandoc",
+			},
+			settings = {
+				ltex = {
+					dictionary = {
+						["en-US"] = words,
+					},
+				},
 			},
 		})
 

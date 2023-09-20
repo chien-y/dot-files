@@ -38,7 +38,5 @@ opt.splitbelow = true
 
 opt.iskeyword:append("-")
 
---- auto pairs configuration: add $.$
-vim.cmd([[
-    let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''", '$':'$', '$$':'$$'}
-]])
+-- add spell dictionary
+vim.opt.spellfile = vim.fn.stdpath("config") .. "/lua/spell/en.utf-8.add"
