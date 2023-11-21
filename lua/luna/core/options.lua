@@ -9,6 +9,12 @@ opt.tabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
 opt.autoindent = true
+opt.smartindent = true
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "cpp", "lua", "c" },
+  command = "setlocal shiftwidth=2 tabstop=2",
+})
 
 -- line wrapping
 opt.wrap = true
@@ -39,4 +45,10 @@ opt.splitbelow = true
 opt.iskeyword:append("-")
 
 -- add spell dictionary
-vim.opt.spellfile = vim.fn.stdpath("config") .. "/lua/spell/en.utf-8.add"
+opt.spellfile = vim.fn.stdpath("config") .. "/lua/spell/en.utf-8.add"
+
+-- disable continuation of comment to new lines by 'o'
+-- continue comment by hitting <Enter>: r
+vim.cmd([[
+    autocmd FileType * set formatoptions-=o
+]])

@@ -12,7 +12,7 @@ keymap.set("n", "H", "^")
 -- keymap.set("n", "o", "6<C-e>o")
 keymap.set("n", "<leader>w", ":w<CR>", { desc = "Write file" })
 keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
-keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "No highlight" }) -- clear search highlight (no highlight)
+keymap.set("n", "<Esc>", ":nohl<CR>", { desc = "No highlight" }) -- clear search highlight (no highlight)
 
 keymap.set("n", "x", '"_x') -- Do not copy when delete characters
 
@@ -30,6 +30,18 @@ keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" 
 keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
+
+-- navigate terminals
+keymap.set(
+  "t",
+  "<C-x>",
+  vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true),
+  { desc = "Escape terminal mode" }
+)
+keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Navigate left in terminal" })
+keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Navigate down in terminal" })
+keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Navigate up in terminal" })
+keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Navigate right in terminal" })
 
 --------------------
 -- Plugin Keybinds

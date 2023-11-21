@@ -8,6 +8,7 @@ return {
 		-- import nvim-autopairs
 		local autopairs = require("nvim-autopairs")
 		local Rule = require("nvim-autopairs.rule")
+		local cond = require("nvim-autopairs.conds")
 
 		-- configure autopairs
 		autopairs.setup({
@@ -19,8 +20,11 @@ return {
 			},
 		})
 
-		autopairs.add_rule(Rule("$", "$", "tex"))
-		autopairs.add_rule(Rule("$$", "$$", "tex"))
+		-- autopairs.add_rule(Rule("$$", "$$", "tex"):with_move(cond.after_text("$$") and cond.not_before_char("$$")))
+
+		autopairs.add_rule(Rule("$", "$", "tex"):with_move(function(opts)
+			return opts.next_char == opts.char
+		end))
 
 		-- import nvim-autopairs completion functionality
 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")

@@ -48,8 +48,13 @@ return {
 	s({ trig = ";l", snippetType = "autosnippet" }, { t("\\lambda") }),
 	s({ trig = ";e", snippetType = "autosnippet" }, { t("\\varepsilon") }),
 	s({ trig = ";z", snippetType = "autosnippet" }, { t("\\zeta") }),
+	-- s({ trig = ";$", name = "math block", snippetType = "autosnippet" }, { t({ "$$", "\t" }), i(1), t({ "", "$$" }) }),
 
 	s({ trig = "ali*", name = "Align" }, { t({ "\\begin{align*}", "\t" }), i(1), t({ "", "\\end{align*}" }) }),
+	s(
+		{ trig = "eq", name = "equation with label" },
+		{ t({ "\\begin{equation} \\label{" }), i(1), t({ "}", "\t" }), i(2), t({ "", "\\end{equation}" }) }
+	),
 
 	-- frac
 	s({ trig = "ff", dscr = "Expands 'ff' into '\frac{}{}'" }, {
@@ -58,12 +63,11 @@ return {
 		t("}{"),
 		i(2), -- insert node 2
 		t("}"),
-		{ condition = in_mathzone },
-	}),
+	}, { condition = in_mathzone }),
 
-	s(
-		{ trig = "sd", snippetType = "autosnippet", wordTrig = false },
-		fmta("_{\\mathrm{<>}}", { d(1, get_visual) }),
-		{ condition = in_mathzone }
-	),
+	-- s(
+	-- 	{ trig = "sd", snippetType = "autosnippet", wordTrig = false },
+	-- 	fmta("_{\\mathrm{<>}}", { d(1, get_visual) }),
+	-- 	{ condition = in_mathzone }
+	-- ),
 }
