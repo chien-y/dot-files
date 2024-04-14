@@ -12,7 +12,7 @@ keymap.set("n", "H", "^")
 -- keymap.set("n", "o", "6<C-e>o")
 keymap.set("n", "<leader>w", ":w<CR>", { desc = "Write file" })
 keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
-keymap.set("n", "<Esc>", ":nohl<CR>", { desc = "No highlight" }) -- clear search highlight (no highlight)
+keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "No highlight" }) -- clear search highlight (no highlight)
 
 keymap.set("n", "x", '"_x') -- Do not copy when delete characters
 
@@ -54,5 +54,5 @@ keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git bra
 keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]r>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
 
 -- c++ compile, compile and excute
-keymap.set("n", "<F8>", ":w<CR> :!g++ -Wall -std=c++17 % -o %< <CR>", { silent = true })
-keymap.set("n", "<F9>", ":w<CR> :!g++ -Wall -std=c++17 % -o %< && ./%< <CR>", { silent = true })
+keymap.set("n", "<F8>", ":w<CR> :!g++ -Wall -g -std=c++17 % -o %< <CR>", { silent = true })
+keymap.set("n", "<F9>", ":w<CR> :!g++ -Wall -g -std=c++17 % -o %< && ./%< <CR>", { silent = true })

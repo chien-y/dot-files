@@ -1,9 +1,10 @@
 return {
+  -- better tab appearance
   "akinsho/bufferline.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   version = "*",
   opts = {
-  options = {
+    options = {
       mode = "tabs",
       separator_style = "slant",
     },

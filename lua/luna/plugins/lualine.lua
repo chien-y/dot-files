@@ -54,6 +54,7 @@ return {
       options = {
         -- theme = my_lualine_theme,
         theme = "tokyonight",
+        -- theme = "kanagawa",
         -- theme = "vscode",
       },
       sections = {

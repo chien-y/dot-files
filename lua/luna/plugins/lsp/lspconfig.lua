@@ -1,9 +1,13 @@
 return {
+	--------------------
+	-- Configure language servers
+	--------------------
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
+		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
 		-- import lspconfig plugin
@@ -172,7 +176,7 @@ return {
 		lspconfig["clangd"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-			filetype = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+			filetype = { "c", "cc", "cpp", "objc", "objcpp", "cuda", "proto" },
 			-- single_file_support = true,
 		})
 

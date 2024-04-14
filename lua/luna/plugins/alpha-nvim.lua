@@ -1,4 +1,5 @@
 return {
+  -- Home page setup
   "goolord/alpha-nvim",
   event = "VimEnter",
   dependencies = { "nvim-tree/nvim-web-devicons" },
